@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="도면을 바탕으로 PLC 프로그램 초안을 준비하고 GX Works2 오류 검사 기준을 확인하는 도구입니다."
+    >
+    <title>PLC 초안 도우미</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="PLC 초안 도우미 홈">
+        <span class="brand-mark" aria-hidden="true">GX</span>
+        <span>PLC 초안 도우미</span>
+      </a>
+      <span class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        에이전트 연결 준비 중
+      </span>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">PLC 실습 · 초안과 점검</p>
+        <h1 id="page-title">동작을 먼저 정리하고<br>PLC 초안을 준비해요</h1>
+        <p class="intro-copy">
+          도면을 바탕으로 작화를 준비하고, 프로그램 점검 기준을 확인할 수 있어요.
+        </p>
+      </section>
+
+      <section class="notice" aria-labelledby="notice-title">
+        <span class="notice-icon" aria-hidden="true">i</span>
+        <div>
+          <h2 id="notice-title">AI 에이전트는 아직 연결되지 않았어요</h2>
+          <p>
+            이 페이지는 기획된 작업 순서와 입력 파일을 안내해요.
+            도면 작화, GX Works2 분석, 컴파일 결과 점검은 아직 실행되지 않아요.
+          </p>
+        </div>
+      </section>
+
+      <section class="workflow-card" aria-labelledby="workflow-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">에이전트 진행 순서</p>
+            <h2 id="workflow-title">도면에서 점검까지</h2>
+          </div>
+          <span class="coming-soon">기획 단계</span>
+        </div>
+        <ol class="workflow-list">
+          <li>
+            <span class="workflow-number">1</span>
+            <div><strong>도면 확인</strong><p>도면과 동작 설명을 읽고 정보가 부족하면 먼저 질문해요.</p></div>
+          </li>
+          <li>
+            <span class="workflow-number">2</span>
+            <div><strong>PLC 패널 초안 작성</strong><p>글로벌 라벨과 PLC 패널 작화 초안을 정리해요. 사양서에 없는 동작은 추가하지 않아요.</p></div>
+          </li>
+          <li>
+            <span class="workflow-number">3</span>
+            <div><strong>프로그램 오류 점검</strong><p>컴파일 후 확인한 문제를 위치, 한 줄 이유, 수정 제안 순서로 알려줘요.</p></div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="rules-card" aria-labelledby="rules-title">
+        <p class="step-label">점검 예정 기준</p>
+        <h2 id="rules-title">어떤 항목을 살펴보나요?</h2>
+        <ul class="rules-list">
+          <li>
+            <span class="rule-number" aria-hidden="true">1</span>
+            <p><strong>중복 코일</strong><br>같은 디바이스를 코일로 두 번 이상 사용했는지 확인해요.</p>
+          </li>
+          <li>
+            <span class="rule-number" aria-hidden="true">2</span>
+            <p><strong>비트 크기와 명령어</strong><br>값의 크기와 명령어 형식이 맞는지 확인해요. 세부 판별 규칙은 확인이 필요해요.</p>
+          </li>
+          <li>
+            <span class="rule-number" aria-hidden="true">3</span>
+            <p><strong>자기유지·인터록 회로</strong><br>동작 설명과 회로 구성이 맞는지 살펴봐요.</p>
+          </li>
+          <li>
+            <span class="rule-number" aria-hidden="true">4</span>
+            <p><strong>D/ 나눗셈 명령어</strong><br><code>D/ 나눌 대상(S1) 나누는 값(S2) 결과 위치(D)</code> 순서인지 확인해요.</p>
+          </li>
+        </ul>
+        <p class="rules-footnote">
+          위 항목은 기획된 기준이며 자동 검사 결과가 아니에요. 정보가 부족하면 확인을 요청하고, 코드 수정 전에는 사용자 동의를 받아요.
+        </p>
+      </section>
+
+      <section class="workspace" data-file-picker data-extensions=".pdf,.png,.jpg,.jpeg" aria-labelledby="drawing-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">1단계 · 작화 초안</p>
+            <h2 id="drawing-title">도면 또는 사진</h2>
+          </div>
+          <span class="file-extension">PDF · PNG · JPG</span>
+        </div>
+
+        <label class="dropzone" for="drawing-input">
+          <input
+            class="visually-hidden"
+            id="drawing-input"
+            data-file-input
+            type="file"
+            accept=".pdf,.png,.jpg,.jpeg"
+            aria-describedby="drawing-help drawing-message"
+          >
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v4h14v-4" />
+            </svg>
+          </span>
+          <span class="dropzone-title">파일을 끌어다 놓거나</span>
+          <span class="browse-link">도면 파일 찾아보기</span>
+          <span class="dropzone-help" id="drawing-help">PDF 또는 이미지 파일 하나를 선택해 주세요</span>
+        </label>
+
+        <p class="message" id="drawing-message" role="status" aria-live="polite" hidden></p>
+
+        <section class="file-card" aria-label="선택한 도면 파일" hidden>
+          <span class="file-badge" aria-hidden="true">PLC</span>
+          <div class="file-info">
+            <p class="file-name"></p>
+            <p class="file-size"></p>
+          </div>
+          <button class="remove-button" type="button" aria-label="선택한 도면 파일 지우기">지우기</button>
+        </section>
+        <p class="upload-note">도면을 선택해도 아직 라벨이나 PLC 패널 초안이 만들어지지는 않아요.</p>
+      </section>
+
+      <section class="workspace" data-file-picker data-extensions=".gxw" aria-labelledby="upload-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">2단계 · 컴파일 후 점검</p>
+            <h2 id="upload-title">GX Works2 프로젝트</h2>
+          </div>
+          <span class="file-extension">.gxw</span>
+        </div>
+
+        <label class="dropzone" for="file-input">
+          <input
+            class="visually-hidden"
+            id="file-input"
+            data-file-input
+            type="file"
+            accept=".gxw"
+            aria-describedby="upload-help upload-message"
+          >
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15v4h14v-4" />
+            </svg>
+          </span>
+          <span class="dropzone-title">파일을 끌어다 놓거나</span>
+          <span class="browse-link">파일 찾아보기</span>
+          <span class="dropzone-help" id="upload-help">.gxw 파일 하나를 선택해 주세요</span>
+        </label>
+
+        <p class="message" id="upload-message" role="status" aria-live="polite" hidden></p>
+
+        <section class="file-card" aria-label="선택한 GX Works2 프로젝트" hidden>
+          <span class="file-badge" aria-hidden="true">GX</span>
+          <div class="file-info">
+            <p class="file-name"></p>
+            <p class="file-size"></p>
+          </div>
+          <button class="remove-button" type="button" aria-label="선택한 GX Works2 프로젝트 지우기">
+            지우기
+          </button>
+        </section>
+
+        <p class="upload-note">파일 선택만 가능하며, 실제 컴파일이나 오류 판정은 수행하지 않아요.</p>
+      </section>
+
+      <div class="privacy-note">
+        <span aria-hidden="true">🔒</span>
+        <p>선택한 파일은 이 브라우저에서만 확인하며 외부로 전송하지 않아요.</p>
+      </div>
+
+      <section class="results" aria-labelledby="results-title">
+        <div class="section-heading results-heading">
+          <div>
+            <p class="step-label">결과 형식</p>
+            <h2 id="results-title">알기 쉬운 점검 내용</h2>
+          </div>
+          <span class="coming-soon">준비 중</span>
+        </div>
+        <p class="results-copy">
+          문제가 있으면 위치 → 이유 한 줄 → 수정 제안 순서로 알려줘요.
+          확인한 범위에 문제가 없으면 “이상 없음”, 정보가 부족하면 “확인 필요”라고 안내하는 것이 목표예요.
+        </p>
+        <button class="inspect-button" type="button" disabled>
+          도면 작화 및 프로그램 점검
+          <span aria-hidden="true">→</span>
+        </button>
+      </section>
+
+      <footer class="page-footer">
+        <p>실제 동작은 GX Works2에서 직접 확인해 주세요. 이 웹 화면은 컴파일이나 설비 제어를 수행하지 않아요.</p>
+      </footer>
+    </main>
+  </body>
+</html>
