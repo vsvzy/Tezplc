@@ -3,6 +3,46 @@
 코드를 잘 몰라도 괜찮아요. **할 일을 적고 → Copilot과 만들고 → 직접 확인하는 순서**로 시작해 보세요.
 이 저장소에는 협업 안내와 양식이 준비되어 있어요. 실제 앱과 실행 방법은 아직 없어요.
 
+## Hallmark로 웹사이트 디자인하기
+
+**Hallmark**는 Copilot이 획일적인 AI 스타일을 줄이고 웹 화면을 설계하도록 돕는 스킬이에요.
+앱에 넣는 라이브러리나 웹사이트 배포 서비스는 아니에요. 설치만으로 화면이 생기거나 사이트가 공개되지는 않아요.
+
+이 저장소의 [`.agents/skills/hallmark/SKILL.md`](.agents/skills/hallmark/SKILL.md)에 프로젝트용으로 포함되어 있어요.
+스킬을 지원하는 Copilot에서 **이 변경이 포함된 브랜치**를 열고 다음처럼 요청하세요. 팀원마다 전역 설치할 필요는 없어요.
+
+> Hallmark를 사용해서 Tezplc의 PLC 이중코일 검사 웹사이트를 디자인해줘. 먼저 저장소의 기획서·PRD·TRD와 기존 코드를 확인하고, 파일 업로드·검사 결과·중복 코일 위치 확인을 중심으로 구성해줘. 문서나 구현이 없으면 있는 것처럼 가정하지 말고 알려줘. 실제 검사 기능과 접근성은 디자인 때문에 바꾸지 마.
+
+지금은 앱 코드가 없으므로 먼저 요구사항과 구현 범위를 준비해야 해요.
+기존 화면이 생긴 뒤에는 **실제 파일 경로**를 지정해서 다음처럼 요청할 수 있어요.
+
+> Hallmark로 `실제/화면/파일`을 audit해줘. 코드는 수정하지 말고 디자인 문제만 알려줘.
+
+> Hallmark로 `실제/화면/파일`을 redesign해줘. 기존 내용·입력·버튼 동작과 PLC 검사 로직은 유지해줘.
+
+스킬이 자동 인식되지 않으면 `.agents/skills/hallmark/SKILL.md`를 읽고 적용하라고 명시하세요.
+Copilot 환경별 스킬 지원과 명령 메뉴는 다를 수 있어요.
+
+### 포함된 버전과 확인 방법
+
+- 원본: [Nutlope/hallmark](https://github.com/Nutlope/hallmark), Hallmark 2.0.0
+- 고정한 커밋: `4f6a46c6dc325d40ab268c93e25c7b96676ebccd` (`skills-lock.json`에도 기록)
+- 원본 스킬·참조 문서·테마·검사 스크립트와 [MIT 라이선스](.agents/skills/hallmark/LICENSE)를 그대로 포함했어요. 외부 원본은 번역·수정하지 않았어요.
+- 설치 도구: `skills@1.7.4`, 현재 프로젝트의 `github-copilot` 대상으로 복사 설치. 전역 설정·API 키·훅은 추가하지 않았어요.
+
+Node.js 18 이상에서 저장소 루트 기준으로 스킬 자체를 확인할 수 있어요.
+이 명령은 PLC 검사나 웹사이트 동작 테스트가 아니에요.
+
+```sh
+node .agents/skills/hallmark/scripts/refcheck.mjs --errors
+node --test .agents/skills/hallmark/scripts/theme.test.mjs
+node .agents/skills/hallmark/scripts/theme.mjs validate .agents/skills/hallmark/references/themes/*.md
+```
+
+브라우저 기반 디자인 검사는 Chrome과 `puppeteer-core`가 별도로 필요해요.
+웹 앱과 검사 환경을 준비한 뒤 진행하세요. 사진 다운로드·외부 이미지 생성 같은 선택 기능은 외부 통신을 할 수 있으므로
+학교 자료·PLC 소스·개인정보를 외부로 보내지 않도록 확인하세요. 이미지 생성 API나 유료 서비스는 자동으로 설정하지 않아요.
+
 ## 1. 할 일을 하나 적어요
 
 GitHub의 **Issues → New issue**에서 양식을 고르세요.
